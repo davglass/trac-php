@@ -1,9 +1,9 @@
 h2. Trac-PHP
 
-I would make a PHP frontend to Trac. Python is pretty slow on Apache and Trac is
+The goal is to make a PHP frontend to Trac. Python is pretty slow on Apache and Trac is
 really hard to customize.
 
-This is a proof of concept..
+This is only a proof of concept..
 
 Currently it:
     Parses the trac.ini config file
