@@ -35,7 +35,7 @@ class Env extends Base {
     }
 
     public function parse($file) {
-        $this->logger('parse', $file);
+        //$this->logger('parse', $file);
         $data = array();
         $str = file($file);
         $title = false;
@@ -53,7 +53,7 @@ class Env extends Base {
                 $data[$title][$k] = $v;
             }
         }
-        $this->logger('Parsed', count($data). ' records');
+        //$this->logger('Parsed', count($data). ' records');
         $this->set('trac', $data);
     }
 

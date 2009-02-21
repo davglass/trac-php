@@ -16,7 +16,12 @@ class WikiModule extends BaseModule {
 
     function __construct($cfg) {
         parent::__construct($cfg);
-        $this->logger('WIKI_MODULE', $this);
+        $db = $this->get('req')->get('env')->db;
+        //$this->logger('WIKI_MODULE', $db);
+
+        $q = $db->query('select * from wiki where (name = "WikiStart") order by version desc limit 0, 1');
+        $rs = $db->fetch_object($q);
+        $this->logger('rs', $rs);
     }    
 }
 
