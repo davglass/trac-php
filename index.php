@@ -7,9 +7,10 @@ include('inc/include.php');
 
 $env = new Env('./env/');
 
-$db = new DB($env);
+$env->db = new DB($env);
 
 $req = new Request(array('env' => $env));
 $req->registerHandler('ticket', 'TicketModule');
+$req->registerHandler('report', 'ReportModule');
 $req->respond();
 ?>

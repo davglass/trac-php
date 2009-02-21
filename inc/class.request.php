@@ -3,7 +3,7 @@
 class Request extends Base {
     protected $cfg = array(
         'args' => array(),
-        'url' => '',
+        'url' => 'wiki',
         'username' => 'anonymous',
         'perms' => array(),
         'realm' => '',
@@ -54,12 +54,15 @@ class Request extends Base {
     public function respond() {
         $this->_filter();
         $handler = $this->get('handler');
-        $class = new $handler;
+        $class = new $handler(array('req' => $this));
     }
 
     private function _filter() {
         $url = $_SERVER['REDIRECT_URL'];
         $url = str_replace(ENV_PATH, '', $url);
+        if (substr($url, -1) == '/') {
+            $url = substr($url, 0, -1);
+        }
         $query = $_SERVER['REDIRECT_QUERY_STRING'];
         $this->set('url', $url);
         $tmp = explode('/', $url);
