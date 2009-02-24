@@ -8,3 +8,8 @@ This is only a proof of concept..
 Currently it:
     Parses the trac.ini config file
     Intercepts a request and intantiates a Module Class
+
+
+PEAR Packages:
+    * sudo pear install Text_Wiki
+    * sudo pear install Text_Wiki_Doku-0.0.1

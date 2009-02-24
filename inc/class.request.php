@@ -6,7 +6,7 @@ class Request extends Base {
         'url' => 'wiki',
         'username' => 'anonymous',
         'perms' => array(),
-        'realm' => '',
+        'realm' => 'wiki',
         'handler' => '',
         'env' => null
     );
@@ -40,6 +40,12 @@ class Request extends Base {
     protected function validate($realm, $handler) {
         $ret = false;
         if ($this->handlers[$realm]) {
+            if (!class_exists($handler)) {
+                $name = strtolower(str_replace('Module', '', $handler));
+                if (is_file('./inc/class.module.'.$name.'.php')) {
+                    include('./inc/class.module.'.$name.'.php');
+                }
+            }
             if (class_exists($handler)) {
                 $ret = true;
             }
@@ -49,6 +55,18 @@ class Request extends Base {
 
     public function registerHandler($realm, $handler) {
         $this->handlers[$realm] = $handler;
+    }
+
+    private function setPerm() {
+        $db = $this->get('env')->db;
+        $perms = array();
+        $q = $db->query("select action from permission where (username = '".$this->get('username')."')");
+        if ($rs = $db->fetch_object($q)) {
+            do {
+                $perms[] = $rs->action;
+            } while ($rs = $db->fetch_object($q));
+        }
+        $this->set('perms', $perms);
     }
 
     public function respond() {
@@ -66,21 +84,24 @@ class Request extends Base {
         $query = $_SERVER['REDIRECT_QUERY_STRING'];
         $this->set('url', $url);
         $tmp = explode('/', $url);
-        if ($tmp[0]) {
-            $handler = $this->getHandler($tmp[0]);
-            $realm = $tmp[0];
-            if ($this->validate($realm, $handler)) {
-                $this->set('realm', $realm);
-                $this->set('handler', $handler);
-            } else {
-                $this->set('realm', 'no');
-                $this->set('handler', 'NoModule');
-            }
+        $realm = $tmp[0];
+        
+        if (!$realm) {
+            $realm = $this->get('realm');
+        }
+        $handler = $this->getHandler($realm);
+        if ($this->validate($realm, $handler)) {
+            $this->set('realm', $realm);
+            $this->set('handler', $handler);
+        } else {
+            $this->set('realm', 'no');
+            $this->set('handler', 'NoModule');
         }
         if ($query) {
             parse_str($query, $q);
             $this->set('args', $q);
         }
+        $this->setPerm();
     }
     
 }
