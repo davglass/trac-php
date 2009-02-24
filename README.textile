@@ -8,8 +8,11 @@ This is only a proof of concept..
 Currently it:
     Parses the trac.ini config file
     Intercepts a request and intantiates a Module Class
+    Default template display
+    Most pages are dispatched and rendered.
+    Some wiki pages are parsed
 
 
 PEAR Packages:
     * sudo pear install Text_Wiki
-    * sudo pear install Text_Wiki_Doku-0.0.1
+    * sudo pear install Text_Wiki_Creole
