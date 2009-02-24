@@ -26,8 +26,8 @@ class WikiModule extends BaseModule {
         $url = $this->req->get('url');
         if (substr($url, 0, 5) == 'wiki/') {
             $url = substr($url, 5);
+            $this->defaultPage = $url;
         }
-        $this->defaultPage = $url;
     }
 
     private function preParseTxt(&$txt) {

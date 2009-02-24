@@ -63,6 +63,9 @@ END;
     }
 
     private function body($txt) {
+        $config = $this->req->get('env')->get('trac');
+        $project = $config['project'];
+        $url = $project['url'];
 print <<<END
 <div id="main">
     <div id="ctxtnav" class="nav">
@@ -83,12 +86,15 @@ END;
     }
 
     private function footer() {
+        $config = $this->req->get('env')->get('trac');
+        $project = $config['project'];
+        $url = $project['url'];
 print <<<END
 <div id="altlinks">
     <h3>Download in other formats:</h3>
     <ul>
         <li class="last first">
-            <a rel="nofollow" href="wiki/WikiStart?format=txt">Plain Text</a>
+            <a rel="nofollow" href="{$url}wiki/WikiStart?format=txt">Plain Text</a>
         </li>
     </ul>
 </div>

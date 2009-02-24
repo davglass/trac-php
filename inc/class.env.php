@@ -42,19 +42,21 @@ class Env extends Base {
         $section = false;
         foreach ($str as $n => $line) {
             $line = trim($line);
-            if (substr($line, 0, 1) == '[') {
-                $title = str_replace(array('[', ']'), '', $line);
-                $data[$title] = array();
-            } elseif ($line != '' && $title) {
-                $pos = strpos($line, '=');
-                $k = trim(substr($line, 0, $pos));
-                $v = trim(substr($line, $pos + 1));
-                $this->_augmentArg($v);
-                $data[$title][$k] = $v;
+            if (substr($line, 0, 1) != ';') {
+                if (substr($line, 0, 1) == '[') {
+                    $title = str_replace(array('[', ']'), '', $line);
+                    $data[$title] = array();
+                } elseif ($line != '' && $title) {
+                    $pos = strpos($line, '=');
+                    $k = trim(substr($line, 0, $pos));
+                    $v = trim(substr($line, $pos + 1));
+                    $this->_augmentArg($v);
+                    $data[$title][$k] = $v;
+                }
             }
         }
-        //$this->logger('Parsed', count($data). ' records');
         $this->set('trac', $data);
+        //$this->logger('Parsed: '. count($data). ' records', $data);
     }
 
     protected function _augmentArg(&$v) {
