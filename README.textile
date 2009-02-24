@@ -16,3 +16,6 @@ Currently it:
 PEAR Packages:
     * sudo pear install Text_Wiki
     * sudo pear install Text_Wiki_Creole
+
+
+NOTE: CSS, Images, File Structure and Config files are from the Trac Project By Edgewall Software. http://www.edgewall.org/
