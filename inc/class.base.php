@@ -3,6 +3,9 @@ class Base {
     protected $config = array();
 
     function __construct($config) {
+        if (!is_array($this->cfg)) {
+            $this->cfg = array();
+        }
         $this->setConfig($config);
     }
 

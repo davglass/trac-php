@@ -6,16 +6,17 @@ really hard to customize.
 This is only a proof of concept..
 
 Currently it:
-    Parses the trac.ini config file
-    Intercepts a request and intantiates a Module Class
-    Default template display
-    Most pages are dispatched and rendered.
-    Some wiki pages are parsed
+* Parses the trac.ini config file
+* Intercepts a request and intantiates a Module Class
+* Default template display
+* Most pages are dispatched and rendered.
+* Some wiki pages are parsed (Needs a MoinMoin parser written in PHP)
+* Ticket class works, fetch, change & save including history
 
 
 PEAR Packages:
-    * sudo pear install Text_Wiki
-    * sudo pear install Text_Wiki_Creole
+* sudo pear install Text_Wiki
+* sudo pear install Text_Wiki_Creole
 
 
 NOTE: CSS, Images, File Structure and Config files are from the Trac Project By Edgewall Software. http://www.edgewall.org/

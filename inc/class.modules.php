@@ -16,16 +16,6 @@ class BaseModule extends Base {
     }
 }
 
-class TicketModule extends BaseModule {
-    protected $cfg = array();
-
-    function __construct($cfg) {
-        parent::__construct($cfg);
-        //$this->logger('TICKET_MODULE', $this);
-        $this->render('<h2>TICKET_MODULE</h2>');
-    }    
-}
-
 class ReportModule extends BaseModule {
     protected $cfg = array();
 
